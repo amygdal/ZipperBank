@@ -1,24 +1,37 @@
 package io.zipcoder.domain;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 public class Customer {
-    private Long id;
-    private String first_name;
-    private String last_name;
-    private Set<Address> address;
 
-    public Customer(Long id, String first_name, String last_name, Set<Address> address) {
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
+    private Long id;
+
+    @Column(name = "FIRST_NAME")
+    private String first_name;
+
+    @Column(name = "LAST_NAME")
+    private String last_name;
+
+//    @Column
+//    @ElementCollection(targetClass = Address.class)
+//    private Set<Address> address;
+
+    public Customer(Long id, String first_name, String last_name) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.address = address;
+//        this.address = address;
     }
 
-    public Customer(String first_name, String last_name, Set<Address> address) {
+    public Customer(String first_name, String last_name) {
         this.first_name = first_name;
         this.last_name = last_name;
-        this.address = address;
+//        this.address = address;
     }
 
     public Customer() {
@@ -49,11 +62,11 @@ public class Customer {
         this.last_name = last_name;
     }
 
-    public Set<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(Set<Address> address) {
-        this.address = address;
-    }
+//    public Set<Address> getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Set<Address> address) {
+//        this.address = address;
+//    }
 }

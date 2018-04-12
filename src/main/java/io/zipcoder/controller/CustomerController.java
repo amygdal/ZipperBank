@@ -5,6 +5,7 @@ import io.zipcoder.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,7 +21,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
-    public ResponseEntity createNewCustomer(Customer customer){
+    public ResponseEntity createNewCustomer(@RequestBody Customer customer){
         return customerService.createNewCustomer(customer);
     }
 }
