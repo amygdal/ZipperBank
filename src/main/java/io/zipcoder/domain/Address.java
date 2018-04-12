@@ -1,24 +1,42 @@
 package io.zipcoder.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Address {
+
+    @Id
+    @Column
     private Long id;
-    private String streen_number;
+
+    @Column
+    private String street_number;
+
+    @Column
     private String street_name;
+
+    @Column
     private String city;
+
+    @Column
     private String state;
+
+    @Column
     private String zip;
 
-    public Address(Long id, String streen_number, String street_name, String city, String state, String zip) {
+    public Address(Long id, String street_number, String street_name, String city, String state, String zip) {
         this.id = id;
-        this.streen_number = streen_number;
+        this.street_number = street_number;
         this.street_name = street_name;
         this.city = city;
         this.state = state;
         this.zip = zip;
     }
 
-    public Address(String streen_number, String street_name, String city, String state, String zip) {
-        this.streen_number = streen_number;
+    public Address(String street_number, String street_name, String city, String state, String zip) {
+        this.street_number = street_number;
         this.street_name = street_name;
         this.city = city;
         this.state = state;
@@ -36,12 +54,12 @@ public class Address {
         this.id = id;
     }
 
-    public String getStreen_number() {
-        return streen_number;
+    public String getStreet_number() {
+        return street_number;
     }
 
-    public void setStreen_number(String streen_number) {
-        this.streen_number = streen_number;
+    public void setStreet_number(String street_number) {
+        this.street_number = street_number;
     }
 
     public String getStreet_name() {
