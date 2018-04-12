@@ -1,13 +1,31 @@
 package io.zipcoder.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Account {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     private Long id;
-    private String nickname;
-    private Integer rewards;
-    private Double balance;
-    private Customer customer;
 
+    @Column(name = "NICKNAME")
+    private String nickname;
+
+    @Column(name = "REWARDS")
+    private Integer rewards;
+
+    @Column(name = "BALANCE")
+    private Double balance;
+
+//    @Column(name = "CUSTOMER")
+//    private Customer customer;
+
+    @Column(name = "TYPE")
     private AccountType type;
 
     public Long getId(){
@@ -42,13 +60,13 @@ public class Account {
         this.balance = balance;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
     public AccountType getType() {
         return type;

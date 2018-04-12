@@ -1,10 +1,9 @@
 package io.zipcoder.repository;
 
-import io.zipcoder.domain.Account;
+import io.zipcoder.domain.Customer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountRepository extends CrudRepository <Account, Long>{
-
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 }

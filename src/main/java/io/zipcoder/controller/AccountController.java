@@ -17,4 +17,5 @@ public class AccountController {
     public ResponseEntity getAllAccounts(){
         return accountService.getAllAccounts();
     }
+
 }
