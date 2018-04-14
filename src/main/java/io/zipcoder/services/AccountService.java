@@ -51,4 +51,9 @@ public class AccountService {
         return new ResponseEntity(account, HttpStatus.OK);
     }
 
+    public ResponseEntity deleteAccount(Long id){
+        accountRepository.delete(id);
+        return new ResponseEntity("Account Deleted", HttpStatus.OK);
+    }
+
 }

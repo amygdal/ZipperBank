@@ -29,4 +29,9 @@ public class AccountController {
         return accountService.updateAccount(id, account);
     }
 
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteAccount(@PathVariable Long id){
+        return accountService.deleteAccount(id);
+    }
+
 }
