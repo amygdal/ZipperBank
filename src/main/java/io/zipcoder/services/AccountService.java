@@ -5,9 +5,12 @@ import io.zipcoder.domain.Customer;
 import io.zipcoder.repository.AccountRepository;
 import io.zipcoder.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -36,7 +39,8 @@ public class AccountService {
     }
 
     public ResponseEntity getCustomerAccounts(Long id){
-        return null;
+        List<Account> accounts = accountRepository.findByCustomer_Id(id);
+        return new ResponseEntity(accounts, HttpStatus.OK);
     }
 
 }

@@ -19,7 +19,7 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
-    @RequestMapping(value = "/accounts/{accountid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
     public ResponseEntity getAccountById(@PathVariable Long id){
         return accountService.getById(id);
     }
