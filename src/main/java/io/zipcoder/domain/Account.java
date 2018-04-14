@@ -7,7 +7,6 @@ public class Account {
     private Integer rewards;
     private Double balance;
     private Customer customer;
-
     private AccountType type;
 
     public Long getId(){
