@@ -1,16 +1,15 @@
 package io.zipcoder.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.runner.RunWith;
 import io.zipcoder.domain.Account;
 import io.zipcoder.domain.Customer;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,11 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import static java.util.Collections.singletonList;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SuppressWarnings("unchecked")
 @RunWith(SpringRunner.class)
 @WebMvcTest(AccountController.class)
 public class AccountControllerTest{
@@ -66,7 +64,33 @@ public class AccountControllerTest{
     public void updateAccountTest() throws Exception {
         String requestBody = objectMapper.writeValueAsString(account);
         given(accountController.updateAccount(account.getId(), account)).willReturn(mock(ResponseEntity.class));
-        mockMvc.perform(put("/accounts/1").contentType(MediaType.APPLICATION_JSON).content(requestBody)).andExpect(status().isOk());
+        mockMvc.perform(put("/accounts/1").contentType(APPLICATION_JSON).content(requestBody)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteAccountTest() throws Exception {
+        mockMvc.perform(delete("/accounts/1").contentType(APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getCustomerAccountsTest() throws Exception {
+        ResponseEntity responseEntity = new ResponseEntity(singletonList(account), HttpStatus.OK);
+        given(accountController.getCustomerAccounts(1L)).willReturn(responseEntity);
+        mockMvc.perform(get("/customers/1/accounts").contentType(APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getAccountCustomer() throws Exception {
+        ResponseEntity responseEntity = new ResponseEntity(customer, HttpStatus.OK);
+        given(accountController.getAccountCustomer(1L)).willReturn(responseEntity);
+        mockMvc.perform(get("/accounts/1/customer").contentType(APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void createCustomerAccount() throws Exception {
+        String requestBody = objectMapper.writeValueAsString(account);
+        given(accountController.createCustomerAccount(1L, account)).willReturn(mock(ResponseEntity.class));
+        mockMvc.perform(post("/customers/1/accounts").contentType(APPLICATION_JSON).content(requestBody)).andExpect(status().isOk());
     }
 
 }

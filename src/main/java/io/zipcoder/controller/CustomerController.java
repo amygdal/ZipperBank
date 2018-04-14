@@ -33,8 +33,9 @@ public class CustomerController {
         return customerService.findById(id);
     }
 
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteCustomer(@PathVariable Long id){
         return customerService.deleteCustomer(id);
     }
+
 }
