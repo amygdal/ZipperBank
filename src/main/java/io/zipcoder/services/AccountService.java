@@ -43,4 +43,12 @@ public class AccountService {
         return new ResponseEntity(accounts, HttpStatus.OK);
     }
 
+    public ResponseEntity updateAccount(Long id, Account account){
+        Account oldAccount = accountRepository.findOne(id);
+        account.setCustomer(oldAccount.getCustomer());
+        account.setId(id);
+        accountRepository.save(account);
+        return new ResponseEntity(account, HttpStatus.OK);
+    }
+
 }

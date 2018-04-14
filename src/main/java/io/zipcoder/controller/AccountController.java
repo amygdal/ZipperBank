@@ -1,12 +1,12 @@
 package io.zipcoder.controller;
 
+import io.zipcoder.domain.Account;
+import io.zipcoder.domain.Customer;
 import io.zipcoder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AccountController {
@@ -22,6 +22,11 @@ public class AccountController {
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
     public ResponseEntity getAccountById(@PathVariable Long id){
         return accountService.getById(id);
+    }
+
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.PUT)
+    public ResponseEntity updateAccount(@PathVariable Long id, @RequestBody Account account){
+        return accountService.updateAccount(id, account);
     }
 
 }
