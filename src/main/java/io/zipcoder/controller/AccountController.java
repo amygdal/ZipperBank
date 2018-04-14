@@ -34,4 +34,9 @@ public class AccountController {
         return accountService.deleteAccount(id);
     }
 
+    @RequestMapping(value = "/accounts/{accountId}/customer", method = RequestMethod.GET)
+    public ResponseEntity getAccountCustomer(@PathVariable Long accountId){
+        return accountService.getAccountCustomer(accountId);
+    }
+
 }

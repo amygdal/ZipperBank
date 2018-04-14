@@ -56,4 +56,9 @@ public class AccountService {
         return new ResponseEntity("Account Deleted", HttpStatus.OK);
     }
 
+    public ResponseEntity getAccountCustomer(Long id){
+        Account account = accountRepository.findOne(id);
+        return new ResponseEntity(account.getCustomer(), HttpStatus.OK);
+    }
+
 }

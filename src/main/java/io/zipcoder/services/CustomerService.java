@@ -27,4 +27,9 @@ public class CustomerService {
         Customer customer = customerRepository.findOne(id);
         return new ResponseEntity(customer, HttpStatus.OK);
     }
+
+    public ResponseEntity deleteCustomer(Long id){
+        customerRepository.delete(id);
+        return new ResponseEntity("Customer Deleted", HttpStatus.OK);
+    }
 }

@@ -45,4 +45,9 @@ public class CustomerController {
     public ResponseEntity createCustomerAccount(@PathVariable long id, @RequestBody Account account){
         return accountService.createAccount(id, account);
     }
+
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
+    public ResponseEntity deleteCustomer(@PathVariable Long id){
+        return customerService.deleteCustomer(id);
+    }
 }
