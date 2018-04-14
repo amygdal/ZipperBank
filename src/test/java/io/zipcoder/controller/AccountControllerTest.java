@@ -43,7 +43,7 @@ public class AccountControllerTest{
     }
 
     @Test
-    public void getAllAccounts() throws Exception {
+    public void getAllAccountsTest() throws Exception {
         Iterable<Account> accounts = singletonList(account);
         ResponseEntity<Iterable<Account>> responseEntity = new ResponseEntity<>(accounts, HttpStatus.OK);
         given(accountController.getAllAccounts()).willReturn(responseEntity);
@@ -51,10 +51,18 @@ public class AccountControllerTest{
     }
 
     @Test
-    public void getAccountById() throws Exception {
+    public void getAccountByIdTest() throws Exception {
         ResponseEntity responseEntity = new ResponseEntity(customer, HttpStatus.OK);
         given(accountController.getAccountById(account.getId())).willReturn(responseEntity);
         mockMvc.perform(get("/accounts/1").contentType(APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateAccountTest() throws Exception {
+        Account updateAccount = new Account();
+        ResponseEntity responseEntity = new ResponseEntity(updateAccount, HttpStatus.OK);
+        given(accountController.updateAccount(1L, updateAccount)).willReturn(responseEntity);
+        mockMvc.perform(get("accounts/1").contentType(APPLICATION_JSON)).andExpect(status().isOk());
     }
 
 }

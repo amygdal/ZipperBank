@@ -39,4 +39,15 @@ public class AccountController {
         return accountService.getAccountCustomer(accountId);
     }
 
+    @RequestMapping(value = "/customers/{id}/accounts", method = RequestMethod.GET)
+    public ResponseEntity getCustomerAccounts(@PathVariable Long id){
+        return accountService.getCustomerAccounts(id);
+    }
+
+    @RequestMapping(value = "/customers/{id}/accounts", method = RequestMethod.POST)
+    public ResponseEntity createCustomerAccount(@PathVariable long id, @RequestBody Account account){
+        return accountService.createAccount(id, account);
+    }
+
+
 }

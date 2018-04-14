@@ -18,9 +18,6 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private AccountService accountService;
-
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity getAllCustomers(){
         return customerService.getAllControllers();
@@ -34,16 +31,6 @@ public class CustomerController {
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
     public ResponseEntity findById(@PathVariable long id){
         return customerService.findById(id);
-    }
-
-    @RequestMapping(value = "/customers/{id}/accounts", method = RequestMethod.GET)
-    public ResponseEntity getCustomerAccounts(@PathVariable Long id){
-        return accountService.getCustomerAccounts(id);
-    }
-
-    @RequestMapping(value = "/customers/{id}/accounts", method = RequestMethod.POST)
-    public ResponseEntity createCustomerAccount(@PathVariable long id, @RequestBody Account account){
-        return accountService.createAccount(id, account);
     }
 
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
