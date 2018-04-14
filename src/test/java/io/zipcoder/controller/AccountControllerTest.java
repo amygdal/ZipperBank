@@ -1,7 +1,5 @@
 package io.zipcoder.controller;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.zipcoder.domain.Account;
 import io.zipcoder.domain.Customer;
 import org.junit.Before;
@@ -11,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static java.util.Collections.singletonList;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,30 +30,31 @@ public class AccountControllerTest{
     @MockBean
     private AccountController accountController;
 
-    private Account mockAccount;
-    private ObjectMapper om = new ObjectMapper();
+    private Account account;
+    private Customer customer;
 
     @Before
     public void setup() {
-        Customer mockCustomer = new Customer();
-        mockCustomer.setId(1L);
-
-        mockAccount = new Account();
-        mockAccount.setId(1L);
-        mockAccount.setCustomer(mockCustomer);
+        customer = new Customer();
+        customer.setId(1L);
+        account = new Account();
+        account.setId(1L);
+        account.setCustomer(customer);
     }
 
     @Test
     public void getAllAccounts() throws Exception {
-        Iterable<Account> accounts = singletonList(mockAccount);
-        ResponseEntity<Iterable<Account>> response = new ResponseEntity<>(accounts, HttpStatus.OK);
+        Iterable<Account> accounts = singletonList(account);
+        ResponseEntity<Iterable<Account>> responseEntity = new ResponseEntity<>(accounts, HttpStatus.OK);
+        given(accountController.getAllAccounts()).willReturn(responseEntity);
+        mockMvc.perform(get("/accounts").contentType(APPLICATION_JSON)).andExpect(status().isOk());
+    }
 
-        given(accountController.getAllAccounts())
-                .willReturn(response);
-
-        mockMvc.perform(get("/accounts")
-                .contentType(APPLICATION_JSON))
-                .andExpect(status().isOk());
+    @Test
+    public void getAccountById() throws Exception {
+        ResponseEntity responseEntity = new ResponseEntity(customer, HttpStatus.OK);
+        given(accountController.getAccountById(account.getId())).willReturn(responseEntity);
+        mockMvc.perform(get("/accounts/1").contentType(APPLICATION_JSON)).andExpect(status().isOk());
     }
 
 }
