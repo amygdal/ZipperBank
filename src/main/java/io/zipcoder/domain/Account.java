@@ -1,16 +1,13 @@
 package io.zipcoder.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Account {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID")
+    @Column(name = "ACCOUNT_ID")
     private Long id;
 
     @Column(name = "NICKNAME")
@@ -22,8 +19,9 @@ public class Account {
     @Column(name = "BALANCE")
     private Double balance;
 
-//    @Column(name = "CUSTOMER")
-//    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Customer customer;
 
     @Column(name = "TYPE")
     private AccountType type;
@@ -33,7 +31,7 @@ public class Account {
     }
 
     public void setId(Long id){
-        this.id= id;
+        this.id = id;
     }
 
     public String getNickname() {
@@ -60,13 +58,13 @@ public class Account {
         this.balance = balance;
     }
 
-//    public Customer getCustomer() {
-//        return customer;
-//    }
-//
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public AccountType getType() {
         return type;

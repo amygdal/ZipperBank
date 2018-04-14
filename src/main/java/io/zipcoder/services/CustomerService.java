@@ -22,4 +22,9 @@ public class CustomerService {
         customerRepository.save(customer);
         return new ResponseEntity(customer, HttpStatus.CREATED);
     }
+
+    public ResponseEntity findById(long id) {
+        Customer customer = customerRepository.findOne(id);
+        return new ResponseEntity(customer, HttpStatus.OK);
+    }
 }
