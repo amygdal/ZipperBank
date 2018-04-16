@@ -36,5 +36,5 @@ public class CustomerServiceTest {
         account.setCustomer(customer);
         objectMapper = new ObjectMapper();
     }
-    
+
 }
